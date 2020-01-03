@@ -1,3 +1,3 @@
 ## E-commerce-fashion 
 
-**Based On Reactjs..
+**Based On Reactjs and Redux..
