@@ -1,3 +1,3 @@
 ## E-commerce-fashion 
 
-**Based On Reactjs and Redux..
+**Based On Reactjs, Redux, React-roterdom and redux- persistor...
