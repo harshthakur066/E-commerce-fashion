@@ -14,7 +14,7 @@ import CheckoutPage from './pages/checkout/checkout';
 import { auth, createUserProfileDocument } from './firebase/firebase-utils';
 import { setCurrentUser } from './redux/user/user-action';
 import { SelectCurrentUser } from './redux/user/user-selector';
-import CategoryPage from './pages/catogry/catogry';
+import CollectionPage from './pages/collection/collection';
 
 
 
@@ -54,7 +54,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/shop/hats' component={CategoryPage} />
+          <Route exact path='/shop/:collectionId' component={CollectionPage} />
           <Route exact path='/signin'
             render={() =>
               this.props.currentUser ? (
