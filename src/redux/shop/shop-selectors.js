@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { object } from 'prop-types';
 
 const selectShop = state => state.shop;
 
@@ -15,5 +14,5 @@ export const selectCollection = collectionUrlParam => createSelector(
 
 export const selectCollectionForPreview = createSelector(
     [selectCollections],
-    collections => object.keys(collections).map(key => collections[key])
+    collections => Object.keys(collections).map(key => collections[key])
 );
