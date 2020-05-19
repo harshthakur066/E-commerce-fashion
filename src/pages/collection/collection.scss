@@ -12,6 +12,10 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
 
+    @media screen and (max-width: 800px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
     & .collection-item {
       margin-bottom: 30px;
     }

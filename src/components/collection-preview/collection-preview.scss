@@ -3,6 +3,13 @@
   flex-direction: column;
   margin-bottom: 30px;
 
+  @media screen and (max-width: 800px) {
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    width: auto;
+  }
+
   .title {
     font-size: 28px;
     margin-bottom: 25px;
@@ -11,5 +18,10 @@
   .preview {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 800px) {
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
   }
 }
