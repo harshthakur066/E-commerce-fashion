@@ -10,6 +10,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import { setCurrentUser } from "./redux/user/user-action";
 import Header from "./components/header/header";
 import { SelectCurrentUser } from "./redux/user/user-selector";
+import WithSpinner from "./components/with-spinner/with-spinner";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
 const ShopPage = lazy(() => import("./pages/shop/shop"));
@@ -55,7 +56,7 @@ class App extends React.Component {
         <GlobalStyle />
         <Header />
         <Switch>
-          <Suspense fallback={<h2>...Loading</h2>}>
+          <Suspense fallback={<WithSpinner />}>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/shop" component={ShopPage} />
             <Route
