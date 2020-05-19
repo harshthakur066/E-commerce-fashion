@@ -1,21 +1,24 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { GlobalStyle } from "./global.styles";
 
-import HomePage from "./pages/homepage/homepage";
-import ShopPage from "./pages/shop/shop";
-import Header from "./components/header/header";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
-import CheckoutPage from "./pages/checkout/checkout";
-import CollectionPage from "./pages/collection/collection";
-
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 
 import { setCurrentUser } from "./redux/user/user-action";
+import Header from "./components/header/header";
 import { SelectCurrentUser } from "./redux/user/user-selector";
+
+const HomePage = lazy(() => import("./pages/homepage/homepage"));
+const ShopPage = lazy(() => import("./pages/shop/shop"));
+const SignInAndSignUpPage = lazy(() =>
+  import("./pages/sign-in-and-sign-up/sign-in-and-sign-up")
+);
+const CheckoutPage = lazy(() => import("./pages/checkout/checkout"));
+const CollectionPage = lazy(() => import("./pages/collection/collection"));
+
 // import { selectCollectionForPreview } from './redux/shop/shop-selectors';
 
 class App extends React.Component {
@@ -52,21 +55,27 @@ class App extends React.Component {
         <GlobalStyle />
         <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/shop/:collectionId" component={CollectionPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-          <Route exact path="/checkout" component={CheckoutPage} />
+          <Suspense fallback={<h2>...Loading</h2>}>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/shop" component={ShopPage} />
+            <Route
+              exact
+              path="/shop/:collectionId"
+              component={CollectionPage}
+            />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                this.props.currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <SignInAndSignUpPage />
+                )
+              }
+            />
+            <Route exact path="/checkout" component={CheckoutPage} />
+          </Suspense>
         </Switch>
       </div>
     );
